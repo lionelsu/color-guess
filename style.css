@@ -25,3 +25,15 @@ main {
   max-width: 136.6rem;
   max-height: 76.8rem;
 }
+
+#color-container {
+  display: flex;
+  gap: 1.0rem;
+}
+
+.ball {
+  border-radius: 50%;
+  width: 100px;
+  height: 100px;
+  border: 1px solid red;
+}
