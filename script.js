@@ -3,6 +3,7 @@ const colorBalls = document.querySelectorAll('.ball');
 const answer = document.querySelector('#answer');
 const rgbQuestion = document.querySelector('#rgb-color');
 const resetBtn = document.querySelector('#reset-game');
+const score = document.querySelector('#score>span');
 
 // Função para gerar um número aleatório entre 0 e 255
 // maxValue como parâmetro para reutilizar a função, no caso, será 255 ou o .length do const colorBalls
@@ -36,9 +37,18 @@ const applyColorBalls = () => {
 };
 
 // Função de inilialização de novo jogo, será usada para iniciar e resetar
-function newGame() {
+const newGame = () => {
   answer.textContent = 'Escolha uma cor';
   applyColorBalls();
+};
+
+// Função para aplicar o score de 3 em 3 toda a vez que o usuário acertar a cor.
+function applyScore() {
+  let currentScore = Number(score.textContent);
+  currentScore += 3;
+  score.textContent = currentScore;
+
+  return currentScore;
 }
 
 // função responsavel por exibir a mensagem caso acerte ou erre, esta função será chamada no nosso inicializador.
@@ -48,6 +58,8 @@ function tryCorrectBall(ball) {
 
   if (isTheBall === correctBall) {
     answer.textContent = 'Acertou!';
+    applyScore();
+    applyColorBalls();
   } else {
     answer.textContent = 'Errou! Tente novamente!';
   }

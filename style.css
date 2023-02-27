@@ -39,5 +39,5 @@ main {
 }
 
 .ball:active {
-  border: 0.4rem solid red;
+  border: 0.4rem solid black;
 }
