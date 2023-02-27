@@ -37,3 +37,7 @@ main {
   height: 10rem;
   cursor: pointer;
 }
+
+.ball:active {
+  border: 0.4rem solid red;
+}

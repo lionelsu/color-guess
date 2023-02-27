@@ -2,6 +2,7 @@
 const colorBalls = document.querySelectorAll('.ball');
 const answer = document.querySelector('#answer');
 const rgbQuestion = document.querySelector('#rgb-color');
+const resetBtn = document.querySelector('#reset-game');
 
 // Função para gerar um número aleatório entre 0 e 255
 // maxValue como parâmetro para reutilizar a função, no caso, será 255 ou o .length do const colorBalls
@@ -33,17 +34,31 @@ const applyColorBalls = () => {
   applyRdnColor(colorBalls);
   rgbQuestion.innerText = getTargetBall();
 };
-applyColorBalls();
 
-colorBalls.forEach((ball) => {
-  ball.addEventListener('click', () => {
-    const isTheBall = ball.style.backgroundColor;
-    const correctBall = rgbQuestion.textContent;
+// Função de inilialização de novo jogo, será usada para iniciar e resetar
+function newGame() {
+  answer.textContent = 'Escolha uma cor';
+  applyColorBalls();
+}
 
-    if (isTheBall === correctBall) {
-      answer.textContent = 'Acertou!';
-    } else {
-      answer.textContent = 'Errou! Tente novamente!';
-    }
+// função responsavel por exibir a mensagem caso acerte ou erre, esta função será chamada no nosso inicializador.
+function tryCorrectBall(ball) {
+  const isTheBall = ball.style.backgroundColor;
+  const correctBall = rgbQuestion.textContent;
+
+  if (isTheBall === correctBall) {
+    answer.textContent = 'Acertou!';
+  } else {
+    answer.textContent = 'Errou! Tente novamente!';
+  }
+}
+
+// Função com responsabilidade de iniciar as outras funções.
+function init() {
+  newGame();
+  colorBalls.forEach((ball) => {
+    ball.addEventListener('click', () => tryCorrectBall(ball));
   });
-});
+  resetBtn.addEventListener('click', newGame);
+}
+init();
